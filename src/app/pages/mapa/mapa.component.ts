@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ServiceService } from 'src/app/shared/service/service.service';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mapa',
@@ -9,7 +12,8 @@ import { HttpClient } from '@angular/common/http';
 export class MapaComponent implements OnInit {
 
   constructor(
-    private http: HttpClient
+    private service: ServiceService,
+    private route: ActivatedRoute
   ) {}
 
   public lat = -16.67127375644847;
@@ -17,6 +21,9 @@ export class MapaComponent implements OnInit {
 
   public origin: any = { lat: -16.68470614, lng: -49.25463259 };
   public destination: any = { lat: -16.67127375644847, lng: -49.23877828235197 };
+
+  id;
+  pedido;
 
   public renderOptions = {
     suppressMarkers: true,
@@ -37,5 +44,20 @@ export class MapaComponent implements OnInit {
     },
   };
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.id = 0;
+    this.route.paramMap.pipe(
+      switchMap(params => params.get('id'))
+    ).subscribe(
+      (param) => {
+        this.id += param;
+      }
+    );
+    this.service.buscarPedidoEmAndamento(this.id).subscribe(
+      responseApi => {
+        this.pedido = responseApi.data;
+        console.log(this.pedido);
+      }
+    );
+  }
 }
