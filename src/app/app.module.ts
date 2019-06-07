@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapaComponent } from './pages/mapa/mapa.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { CommonModule, LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,12 @@ import { CommonModule } from '@angular/common';
     }),
     AgmDirectionModule
   ],
-  providers: [],
+  providers: [
+    { 
+      provide: LocationStrategy, 
+      useClass: HashLocationStrategy 
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
