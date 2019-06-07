@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ServiceService } from 'src/app/shared/service/service.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
@@ -56,8 +55,10 @@ export class MapaComponent implements OnInit {
     this.service.buscarPedidoEmAndamento(this.id).subscribe(
       responseApi => {
         this.pedido = responseApi.data;
-        console.log(this.pedido);
+        this.destination = { lat: this.pedido.lat, lng: this.pedido.log };
       }
     );
   }
 }
+//-16.7413042578999
+//-49.27694320678711

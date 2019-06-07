@@ -12,9 +12,9 @@ export class ServiceService {
   constructor(
     private http: HttpClient
   ) {}
-
+  
   public buscarPedidoEmAndamento(userId: any): Observable<ResponseApi> {
-    return this.http.get(`localhost:8080/pedido/user/${userId}/openlast`).pipe(
+    return this.http.get(`https://persistenciasandubas.herokuapp.com/pedido/user/${userId}/openlast`).pipe(
       map(this.fromJsonResponseApi.bind(this)),
       catchError(this.handleError)
     );
@@ -25,7 +25,7 @@ export class ServiceService {
     return throwError(error);
   }
 
-  private fromJsonResponseApi(jsonData: any): any {
-    return Object.assign(ResponseApi, jsonData);
+  private fromJsonResponseApi(jsonData: any): ResponseApi {
+    return Object.assign(new ResponseApi(), jsonData);
   }
 }
