@@ -1,6 +1,11 @@
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-direction [origin]="origin" [destination]="destination" [renderOptions]="renderOptions"
-    [markerOptions]="markerOptions">
-  </agm-direction>
-</agm-map>
-<button type="button" class="btn btn-warning btn-lg btn-block" onclick="location.reload();">Atualizar</button>
+<div *ngIf="destination">
+  <agm-map [latitude]="lat" [longitude]="lng">
+    <agm-direction [origin]="origin" [destination]="destination" [renderOptions]="renderOptions"
+      [markerOptions]="markerOptions">
+    </agm-direction>
+  </agm-map>
+  <button row="1" type="button" class="btn btn-warning btn-lg btn-block" onclick="location.reload();">Atualizar</button>
+</div>
+<div *ngIf="!destination">
+  Encontrando pedidos...
+</div>

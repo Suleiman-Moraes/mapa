@@ -19,7 +19,7 @@ export class MapaComponent implements OnInit {
   public lng = -49.23877828235197;
 
   public origin: any = { lat: -16.68470614, lng: -49.25463259 };
-  public destination: any = { lat: -16.67127375644847, lng: -49.23877828235197 };
+  public destination: any = null;
 
   id;
   pedido;
